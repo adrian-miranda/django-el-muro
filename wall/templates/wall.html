@@ -26,7 +26,22 @@
                 {%for mensaje in mensajes%}
                     <h5>{{mensaje.usuario.first_name}} - {{mensaje.created_at}}</h5>
                     <p>{{mensaje.mensaje}}</p>
+                    <div class="comentario">
+                        <h5>nombre y fecha de quien comenta</h5>
+                        <p class="w-50">el mensaje Lorem ipsum dolor sit amet consectetur adipisicing elit. Et facilis, quasi ullam doloremque voluptates praesentium sapiente natus ex laboriosam ipsam modi voluptatibus mollitia numquam quidem eaque tempore dolorum amet possimus!</p>
+                    </div>
+                    <div class="comentar">
+                        <form action="#" method="post">
+                            <h5>Post a comment</h5>
+                            <textarea name="comentario" id="" class="w-50 form-control h-100 mt-2 mb-4" rows="3"></textarea>
+                            <div class="d-flex justify-content-end w-50">
+                            <button type="submit" class="btn btn-primary text-ligth">Post a message</button>
+                        </div>
+                        </form>
+                    </div>
+                    <hr class="w-50">
                 {%endfor%}
+                
             </div>
         </div>
     </div>

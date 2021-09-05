@@ -9,7 +9,7 @@ def wall(request):
         contexto = {
             'mensajes' : mensajes,
         }
-        print(request.POST)
+        # print(request.POST)
         return render(request ,'wall.html' , contexto)
 
 def crearMensaje(request , id):
@@ -18,5 +18,5 @@ def crearMensaje(request , id):
         usuario = usuario,
         mensaje = request.POST['mensaje'],
     )
-    print(request.POST)
+    # print(request.POST)
     return redirect('/wall')
