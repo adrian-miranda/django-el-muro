@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% block titulo%}{{titulo}}{% endblock%}
+{%block contenido%}
+
+{%if request.session.usuario%}
+    {%include 'menu.html'%}
+{%endif%}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 w-50">
+                <form action="crearMensaje/{{request.session.usuario.id}}" method="post">
+                    {% csrf_token %}
+                    <h2>Post a message</h2>
+                    <!-- <input type="text" name="elPost" id="" class="w-100 h-100 form-control" rows="10"> -->
+                    <textarea name="mensaje" id="" class="w-100 h-100 form-control" rows="5"></textarea>
+                    <div class=" d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                        <button type="submit" class="btn btn-primary text-ligth">Post a message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-lg-6  offset-lg-3 w-100">
+                {%for mensaje in mensajes%}
+                    <h5>{{mensaje.usuario.first_name}} - {{mensaje.created_at}}</h5>
+                    <p>{{mensaje.mensaje}}</p>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+{%endblock%}
