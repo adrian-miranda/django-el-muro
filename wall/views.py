@@ -32,3 +32,13 @@ def crearComentario(request, id):
     print(request.POST)
     print(usuario_comentador)
     return redirect('/wall')
+
+def delete(request , id):
+    
+    mensaje = Mensaje.objects.get(id = id)
+    # usuario = User.objects.get(id = request.session['usuario']['id'])
+    # if  mensaje == usuario
+    mensaje.delete()
+    return redirect('/wall')
+    # else:
+    #     return render(request , 'wall.html')
