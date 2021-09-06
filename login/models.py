@@ -46,7 +46,6 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager() #este es el validador
     date_birth = models.DateField()
-    # amigos = models.ManyToManyField('User', related_name="friends")
     def __repr__(self):
         return f'nombre: {self.first_name}\napellido {self.last_name}\nemail: {self.email}\npassword: {self.password}\nfecha nacimiento {self.date_birth}'
     def __str__(self):

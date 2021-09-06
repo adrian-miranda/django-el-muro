@@ -1,15 +1,20 @@
 {% extends 'base.html'%}
 {% block titulo%}{{titulo}}{% endblock%}
 {%block contenido%}
-
 {%if request.session.usuario%}
-{%include 'menu.html'%}
+    {%include 'menu.html'%}
 {%endif%}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 w-50"><h5>La Cant de mensajes creados es: {{cantMensajes}}</h5></div>
+        <div class="col-lg-6 w-50"><h5>La Cant de comentarios entre todos los mensajes son: {{cantComentarios}}</h5></div>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-lg-6 offset-lg-3 w-50">
             <form action="crearMensaje/{{request.session.usuario.id}}" method="post">
-                {% csrf_token %}
+                {%csrf_token%}
                 <h2>Post a message</h2>
                 <!-- <input type="text" name="mensaje" id="" class="w-100 h-100 form-control" rows="10"> -->
                 <textarea name="mensaje" id="" class="w-100 h-100 form-control" rows="5"></textarea>
@@ -24,18 +29,20 @@
     <div class="row">
         <div class="col-lg-6  offset-lg-3 w-100">
             {%for mensaje in mensajes%}
+            <p>numero de mensajes len: {{mensajes|length}}</p>
+            <!-- para saber la cantidad de mensajes en total se debe acceder a todos los mensajes y aplicar el length -->
             <h5>{{mensaje.usuario.first_name}} - {{mensaje.created_at}} -- {{mensaje.id}}</h5>
             <p>{{mensaje.mensaje}}</p>
-            
             <div class="comentario">
-                {%for comentario in comentarios%}
-                {%if comentario.mensaje.id == mensaje.id%}
+                {%for comentario in mensaje.comentarios_mensaje.all%}
                 <h5>Nombre: {{comentario.usuario.first_name}}<br>Fecha: {{comentario.created_at}}</h5>
                 <p class="w-50">Dijo:<br>{{comentario.comentario}}</p>
-                {%endif%}
                 {%empty%}
                 <h5>No  hay comentarios</h5>
                 {%endfor%}
+                <p>numero de comentarios len: {{mensaje.comentarios_mensaje.all|length}}</p>
+                <!-- para saber el largo de los comentarios se debe recorrer la lista completa , no la instancia comentario y aplicar el length -->
+                <p>numero de comentarios count: {{mensaje.comentarios_mensaje.all.count}}</p>
             </div>
             <div class="comentar">
                 <form action="crearComentario/{{mensaje.id}}" method="POST">
@@ -45,10 +52,11 @@
                     <div class="d-flex justify-content-end w-50">
                         <button type="submit" class="btn btn-primary text-ligth">Post a Comment</button>
                         <!-- Link para borrar , falta validar si es el titular quein loo esta borrando -->
+                        {%if usuarios.id == comentarios.comentarios_user.id%}
                         <a href="delete/{{mensaje.id}}" class="btn btn-danger text-ligth mx-2">Delete a message</a>
+                        {%endif%}
                     </div>
                 </form>
-                
             </div>
             <hr class="w-50">
             {%endfor%}

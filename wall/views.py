@@ -6,10 +6,20 @@ def wall(request):
         return redirect('/')
     else:
         mensajes = Mensaje.objects.all().order_by('-created_at')
+        cantMensajes = len(mensajes)
+        print(cantMensajes)
+        
         comentarios = Comentario.objects.all()
+        cantComentarios =len(comentarios)
+
+        print(cantComentarios)
+        usuarios = User.objects.all()
         contexto = {
-            'mensajes'      : mensajes,
-            'comentarios'   : comentarios, 
+            'mensajes'          : mensajes,
+            'comentarios'       : comentarios, 
+            'usuarios'          : usuarios,
+            'cantMensajes'      : cantMensajes,
+            'cantComentarios'   : cantComentarios,
         }
         return render(request , 'wall.html' , contexto)
 
