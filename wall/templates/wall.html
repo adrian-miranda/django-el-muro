@@ -51,8 +51,7 @@
                     <textarea name="comentario" id="" class="w-50 form-control h-100 mt-2 mb-4" rows="3"></textarea>
                     <div class="d-flex justify-content-end w-50">
                         <button type="submit" class="btn btn-primary text-ligth">Post a Comment</button>
-                        <!-- Link para borrar , falta validar si es el titular quein loo esta borrando -->
-                        {%if usuarios.id == comentarios.comentarios_user.id%}
+                        {%if request.session.usuario.id == mensaje.usuario.id%}
                         <a href="delete/{{mensaje.id}}" class="btn btn-danger text-ligth mx-2">Delete a message</a>
                         {%endif%}
                     </div>
