@@ -104,3 +104,12 @@ def logout(request):
         return redirect('/')
     else:
         return redirect('/')
+
+def editar(request):
+    print(f'Desde la vista de editar imprimiendo el metodo GET {request.GET}')
+    print(f'Desde la vista de editar imprimiendo el metodo POST {request.POST}')
+    # return redirect('/wall/')
+    return render(request ,'editar.html')
+# hay que hacer vlidacion y si todo esta bn debe retornar al muro
+# los nombres del formulario sirven para traerlos y ejecutrarlos , las validaciones ya estarian aplicadas
+# solo hay que hacer que los datos no se borren ademas de validarlos

@@ -14,17 +14,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        {%if request.session.usuario%}
-                            <a class="nav-link active" aria-current="page" href="/success"><b>Principal</b></a>
-                        {%else%}
-                            <a class="nav-link active" aria-current="page" href="/">Registrar</a>
-                        {%endif%}
-                    </li>
+                    {%if request.session.usuario%}
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/success"><b>Muro</b></a></li>
+                    <li><a class="nav-link active" aria-current="page" href="/editar"><b>Editar</b></a></li>                        
+                    {%else%}
+                    <li><a class="nav-link active" aria-current="page" href="/"><b>Registrar</b></a></li>
+                    {%endif%}
                 </ul>
                 {%if request.session.usuario%}
-                <b><span class="me-3">Hola, {{request.session.usuario.nombre}} {{request.session.usuario.apellido}}</span></b>
-                <a href="/logout/" class="btn btn-dark text-secondary">Desloguear</a>
+                <b><span class="me-3">Hola: {{request.session.usuario.nombre}} {{request.session.usuario.apellido}}</span></b>
+                <a href="/logout/" class="btn btn-dark text-secondary"><b>Desloguear</b></a>
                 {%endif%}
             </div>
         </nav>

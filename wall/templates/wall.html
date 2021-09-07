@@ -6,8 +6,9 @@
 {%endif%}
 <div class="container">
     <div class="row">
-        <div class="col-lg-6 w-50"><h5>La Cant de mensajes creados es: {{cantMensajes}}</h5></div>
-        <div class="col-lg-6 w-50"><h5>La Cant de comentarios entre todos los mensajes son: {{cantComentarios}}</h5></div>
+        <div class="col-lg-6 offset-lg-3">
+            <h5>Total mensajes creados: {{cantMensajes}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total comentarios creados: {{cantComentarios}}</h5>
+        </div>
     </div>
 </div>
 <div class="container">
@@ -17,7 +18,7 @@
                 {%csrf_token%}
                 <h2>Post a message</h2>
                 <!-- <input type="text" name="mensaje" id="" class="w-100 h-100 form-control" rows="10"> -->
-                <textarea name="mensaje" id="" class="w-100 h-100 form-control" rows="5"></textarea>
+                <textarea name="mensaje" id="" class="w-100 h-100 form-control textarea" rows="5"></textarea>
                 <div class=" d-grid gap-2 d-md-flex justify-content-md-end mt-3">
                     <button type="submit" class="btn btn-primary text-ligth">Post a message</button>
                 </div>
@@ -29,26 +30,29 @@
     <div class="row">
         <div class="col-lg-6  offset-lg-3 w-100">
             {%for mensaje in mensajes%}
-            <p>numero de mensajes len: {{mensajes|length}}</p>
+
+            <p class="text-secondary"><b>Total de mensajes a la fecha: {{mensajes|length}}</b></p>
             <!-- para saber la cantidad de mensajes en total se debe acceder a todos los mensajes y aplicar el length -->
-            <h5>{{mensaje.usuario.first_name}} - {{mensaje.created_at}} -- {{mensaje.id}}</h5>
-            <p>{{mensaje.mensaje}}</p>
-            <div class="comentario">
+
+            <h5>El {{mensaje.created_at|date:"d.M.y"}} {{mensaje.usuario.first_name}} dijo:  <!--{{mensaje.id}}--></h5>
+            <p class="text-light mx-3">{{mensaje.mensaje}}</p>
+            <div class="comentario mx-5">
                 {%for comentario in mensaje.comentarios_mensaje.all%}
-                <h5>Nombre: {{comentario.usuario.first_name}}<br>Fecha: {{comentario.created_at}}</h5>
-                <p class="w-50">Dijo:<br>{{comentario.comentario}}</p>
+                <p><b>{{comentario.created_at|date:"d.M.y"}} {{comentario.usuario.first_name}} Respondio: </b></p>
+                <p class="mx-5 text-light">{{comentario.comentario}}</p>
                 {%empty%}
-                <h5>No  hay comentarios</h5>
+                <p class="mx-5 text-light"><b>Sin comentarios</b></p>
                 {%endfor%}
-                <p>numero de comentarios len: {{mensaje.comentarios_mensaje.all|length}}</p>
+                <hr class="w-50">
+                <p class="text-secondary">Comentarios: {{mensaje.comentarios_mensaje.all|length}}</p>
                 <!-- para saber el largo de los comentarios se debe recorrer la lista completa , no la instancia comentario y aplicar el length -->
-                <p>numero de comentarios count: {{mensaje.comentarios_mensaje.all.count}}</p>
+                <!-- <p class="text-secondary">Comentarios: {{mensaje.comentarios_mensaje.all.count}}</p> -->
             </div>
             <div class="comentar">
                 <form action="crearComentario/{{mensaje.id}}" method="POST">
                     {% csrf_token %}
                     <h5>Post a comment</h5>
-                    <textarea name="comentario" id="" class="w-50 form-control h-100 mt-2 mb-4" rows="3"></textarea>
+                    <textarea name="comentario" id="" class="w-50 form-control h-100 mt-2 mb-4 textarea" rows="3"></textarea>
                     <div class="d-flex justify-content-end w-50">
                         <button type="submit" class="btn btn-primary text-ligth">Post a Comment</button>
                         {%if request.session.usuario.id == mensaje.usuario.id%}

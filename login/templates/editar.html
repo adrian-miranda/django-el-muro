@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+{% block titulo%}{{titulo}}{% endblock%}
+{%block contenido%}
+
+{%if request.session.usuario%}
+    {%include 'menu.html'%}
+{%endif%}
+<h1>Desde la pagina para editar</h1>
+{%endblock%}

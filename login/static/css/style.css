@@ -1,0 +1,10 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgb(68, 59, 202);
+}
+
+.textarea{
+    background-color: #D9D9D6;
+}
