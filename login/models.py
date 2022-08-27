@@ -34,7 +34,7 @@ class UserManager(models.Manager):
             print(f'la edad es: {edad_legal}')
             if edad_legal(cumpleaños) < 16:
                 errores['date_birth'] = 'Debes tener a lo menos 16 años para registrarte.'
-
+        print(errores)
         return errores
 
 class User(models.Model):
@@ -44,8 +44,8 @@ class User(models.Model):
     password = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    objects = UserManager() #este es el validador
     date_birth = models.DateField()
+    objects = UserManager() #este es el validador
     def __repr__(self):
         return f'nombre: {self.first_name}\napellido {self.last_name}\nemail: {self.email}\npassword: {self.password}\nfecha nacimiento {self.date_birth}'
     def __str__(self):

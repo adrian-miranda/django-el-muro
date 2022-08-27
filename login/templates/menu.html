@@ -16,7 +16,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {%if request.session.usuario%}
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="/success"><b>Muro</b></a></li>
-                    <li><a class="nav-link active" aria-current="page" href="/editar"><b>Editar</b></a></li>                        
+                    <li><a class="nav-link active" aria-current="page" href="/editar/{{request.session.usuario.id}}"><b>Editar</b></a></li>                        
                     {%else%}
                     <li><a class="nav-link active" aria-current="page" href="/"><b>Registrar</b></a></li>
                     {%endif%}

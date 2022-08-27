@@ -7,6 +7,5 @@ urlpatterns = [
     path('login/', views.login),
     path('success/', views.success),
     path('logout/', views.logout),
-    path('editar/', views.editar),
-    # pasar a la dir editar el argumento de id <int:id>
+    path('editar/<int:id>', views.editar),
 ]

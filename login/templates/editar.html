@@ -5,5 +5,27 @@
 {%if request.session.usuario%}
     {%include 'menu.html'%}
 {%endif%}
-<h1>Desde la pagina para editar</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 offset-3">
+            <h1>Editar Datos</h1>
+            <form action="/editar/{{request.session.usuario.id}}" method="POST">
+                {% csrf_token %}
+                <label class="form-label" for="first_name">First Name</label>
+                <input class="form-control" type="text" name="first_name" id="" value="{{request.session.user_first_name}}">
+                <label class="form-label" for="last_name">Last Name</label>
+                <input class="form-control" type="text" name="last_name" id="" value="{{request.session.user_last_name}}">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" type="email" name="email" id="" value="{{request.session.user_email}}">
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" type="password" name="password" id="" value="{{request.session.user_password}}">
+                <label class="form-label" for="password_confirm">Password Confirm</label>
+                <input class="form-control" type="password" name="password_confirm" id="" value="{{request.session.user_password_confirm}}">
+                <label for="date_birth">date_birth</label>
+                <input class="form-control" type="date" name="date_birth" id="">
+                <button type="submit" class="btn btn-secondary mt-4 px-5">Actualizar</button>
+            </form>
+        </div>
+    </div>
+</div>
 {%endblock%}
